@@ -29,8 +29,9 @@ class RequestHandler(BaseHTTPRequestHandler):
     def handlePuzzleAnalysis(self):
         length = int(self.headers["Content-length"])
         puzzleImage = self.rfile.read(length)
-        print("Printing puzzle...")
+        print("Begin: printing puzzle...")
         print(puzzleImage)
+        print("End: puzzle printed")
         boardLayout = {"puzzle_layout" : "2s0n7s0n0n0n1s0n4s0n3s9s1s0n2s0n0n0n0n0n6s4s0n8s7s0n0n0n6s0n0n0n0n3s0n2s5s0n7s0n9s0n0n1s0n0n0n2s1s0n0n9s0n4s0n0n9s0n0n0n4s0n6s0n5s0n3s0n6s0n0n0n0n3s0n2s0n0n0n7s0n"}
         jsonData = json.dumps(boardLayout)
         self.send_response(201)
