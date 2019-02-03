@@ -3,12 +3,10 @@ from urllib.parse import parse_qs
 import json, sys
 
 class RequestHandler(BaseHTTPRequestHandler):
-
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", self.headers["Origin"])
         self.send_header("Access-Control-Allow-Credentials", "true")
         BaseHTTPRequestHandler.end_headers(self)
-
     def do_OPTIONS(self):
         self.send_response(200)
         self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
