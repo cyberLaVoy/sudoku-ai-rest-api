@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import parse_qs
-import json, sys
+import sys
 
 class RequestHandler(BaseHTTPRequestHandler):
     def end_headers(self):
@@ -27,23 +27,21 @@ class RequestHandler(BaseHTTPRequestHandler):
     def handlePuzzleAnalysis(self):
         length = int(self.headers["Content-length"])
         puzzleImage = self.rfile.read(length)
-        print("Begin: Printing puzzle...")
-        print(puzzleImage)
-        print("End: Puzzle printed.")
-        boardLayout = {"puzzle_layout" : "2s0n7s0n0n0n1s0n4s0n3s9s1s0n2s0n0n0n0n0n6s4s0n8s7s0n0n0n6s0n0n0n0n3s0n2s5s0n7s0n9s0n0n1s0n0n0n2s1s0n0n9s0n4s0n0n9s0n0n0n4s0n6s0n5s0n3s0n6s0n0n0n0n3s0n2s0n0n0n7s0n"}
-        jsonData = json.dumps(boardLayout)
+        #print("Begin: Printing puzzle...")
+        #print(puzzleImage)
+        #print("End: Puzzle printed.")
+        layout = "207000104039102000006408700060000302507090010002100904009000406050306000030200070"
         self.send_response(201)
-        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Type", "plain/text")
         self.end_headers()
-        self.wfile.write(bytes(jsonData, "utf-8"))
+        self.wfile.write(bytes(layout, "utf-8"))
 
     def randomPuzzleRetrieve(self):
-        boardLayout = {"puzzle_layout" : "2s0n7s0n0n0n1s0n4s0n3s9s1s0n2s0n0n0n0n0n6s4s0n8s7s0n0n0n6s0n0n0n0n3s0n2s5s0n7s0n9s0n0n1s0n0n0n2s1s0n0n9s0n4s0n0n9s0n0n0n4s0n6s0n5s0n3s0n6s0n0n0n0n3s0n2s0n0n0n7s0n"}
-        jsonData = json.dumps(boardLayout)
+        layout = "207000104039102000006408700060000302507090010002100904009000406050306000030200070"
         self.send_response(200)
-        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Type", "plain/text")
         self.end_headers()
-        self.wfile.write(bytes(jsonData, "utf-8"))
+        self.wfile.write(bytes(layout, "utf-8"))
 
 
 
