@@ -32,14 +32,14 @@ class RequestHandler(BaseHTTPRequestHandler):
         #print("End: Puzzle printed.")
         layout = "207000104039102000006408700060000302507090010002100904009000406050306000030200070"
         self.send_response(201)
-        self.send_header("Content-Type", "plain/text")
+        self.send_header("Content-Type", "text/plain")
         self.end_headers()
         self.wfile.write(bytes(layout, "utf-8"))
 
     def randomPuzzleRetrieve(self):
         layout = "207000104039102000006408700060000302507090010002100904009000406050306000030200070"
         self.send_response(200)
-        self.send_header("Content-Type", "plain/text")
+        self.send_header("Content-Type", "text/plain")
         self.end_headers()
         self.wfile.write(bytes(layout, "utf-8"))
 
