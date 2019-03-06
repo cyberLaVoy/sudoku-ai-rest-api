@@ -18,7 +18,6 @@ class PuzzleProcessor:
         cv2.destroyAllWindows()
 
     def loadAndFormatImage(self, bytesString):
-        print(len(bytesString))
         img = cv2.imdecode(np.frombuffer(bytesString, np.uint8), cv2.IMREAD_GRAYSCALE)
         print("Initial image dimensions:", img.shape)
         if img.shape[0] < img.shape[1]:
