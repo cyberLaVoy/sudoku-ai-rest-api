@@ -1,6 +1,8 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import parse_qs
 import sys
+from puzzleprocessor import PuzzleProcessor
+from digitpredictor import DigitPredictor
 
 class RequestHandler(BaseHTTPRequestHandler):
     def end_headers(self):
@@ -25,12 +27,14 @@ class RequestHandler(BaseHTTPRequestHandler):
         pass
 
     def handlePuzzleAnalysis(self):
+        digitPredictor = DigitPredictor()
         length = int(self.headers["Content-length"])
         puzzleImage = self.rfile.read(length)
-        #print("Begin: Printing puzzle...")
-        #print(puzzleImage)
-        #print("End: Puzzle printed.")
-        layout = "000604700706000009000005080070020093800000005430010070050200000300000208002301000"
+        puzzleProcessor = PuzzleProcessor(puzzleImage)
+        cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
+        for cell in cellsWithDigits:
+            cell["label"] = digitPredictor.predictDigit(cell["cell_image"])
+        layout = puzzleProcessor.getPuzzleLayout(cellsWithDigits)
         self.send_response(201)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
