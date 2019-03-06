@@ -19,6 +19,7 @@ class PuzzleProcessor:
 
     def loadAndFormatImage(self, bytesString):
         img = cv2.imdecode(np.frombuffer(bytesString, np.uint8), cv2.IMREAD_GRAYSCALE)
+        print(img.shape)
         if img.shape[0] < img.shape[1]:
             img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
         img = self.shrinkImage(img)

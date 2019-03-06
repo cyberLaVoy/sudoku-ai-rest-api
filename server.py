@@ -30,7 +30,6 @@ class RequestHandler(BaseHTTPRequestHandler):
         digitPredictor = DigitPredictor()
         length = int(self.headers["Content-length"])
         puzzleImage = self.rfile.read(length)
-        print(puzzleImage[0])
         print("Processing puzzle image...")
         #try:
         puzzleProcessor = PuzzleProcessor(puzzleImage)
