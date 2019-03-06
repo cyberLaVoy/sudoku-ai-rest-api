@@ -36,7 +36,6 @@ class RequestHandler(BaseHTTPRequestHandler):
             cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
         except Exception as e:
             print(e)
-            self.handle422()
         print("Labeling cells with digits...")
         layout = "000604700706000009000005080070020093800000005430010070050200000300000208002301000"
         try:
@@ -45,7 +44,6 @@ class RequestHandler(BaseHTTPRequestHandler):
             layout = puzzleProcessor.getPuzzleLayout(cellsWithDigits)
         except Exception as e:
             print(e)
-            self.handle422()
         print("Sending layout...")
         self.send_response(201)
         self.send_header("Content-Type", "text/plain")
