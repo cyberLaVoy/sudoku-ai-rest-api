@@ -30,13 +30,12 @@ class RequestHandler(BaseHTTPRequestHandler):
         digitPredictor = DigitPredictor()
         length = int(self.headers["Content-length"])
         puzzleImage = self.rfile.read(length)
-        print(len(puzzleImage))
         print("Processing puzzle image...")
-        #try:
-        puzzleProcessor = PuzzleProcessor(puzzleImage)
-        cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
-        #except Exception as e:
-        #    print(e)
+        try:
+            puzzleProcessor = PuzzleProcessor(puzzleImage)
+            cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
+        except Exception as e:
+            print(e)
         print("Labeling cells with digits...")
         layout = "000604700706000009000005080070020093800000005430010070050200000300000208002301000"
         try:
