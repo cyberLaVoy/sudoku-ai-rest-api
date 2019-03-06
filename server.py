@@ -38,12 +38,13 @@ class RequestHandler(BaseHTTPRequestHandler):
             print(e)
         print("Labeling cells with digits...")
         layout = "000604700706000009000005080070020093800000005430010070050200000300000208002301000"
-        #try:
-        for cell in cellsWithDigits:
-            cell["label"] = digitPredictor.predictDigit(cell["cell_image"])
-        layout = puzzleProcessor.getPuzzleLayout(cellsWithDigits)
-        #except Exception as e:
-        #    print(e)
+        try:
+            for cell in cellsWithDigits:
+                label = digitPredictor.predictDigit(cell["cell_image"])
+                cell["label"] = str(int(label[0]))
+            layout = puzzleProcessor.getPuzzleLayout(cellsWithDigits)
+        except Exception as e:
+            print(e)
         print("Sending layout...")
         self.send_response(201)
         self.send_header("Content-Type", "text/plain")
