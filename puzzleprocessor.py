@@ -21,8 +21,9 @@ class PuzzleProcessor:
         img = cv2.imdecode(np.frombuffer(bytesString, np.uint8), cv2.IMREAD_GRAYSCALE)
         print("Initial image dimensions:", img.shape)
         if img.shape[0] < img.shape[1]:
-            #img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
-            img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
+            # TODO: figure out how to deal with any rotation; is this even possible?
+            #img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)  # compensate for rotation of locally saved images
+            img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)          # compensate for rotated image recieved on server
         img = self.shrinkImage(img)
         return img
 
