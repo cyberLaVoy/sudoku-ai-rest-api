@@ -38,6 +38,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             print(e)
             self.handle422()
         print("Labeling cells with digits...")
+        layout = "" 
         try:
             for cell in cellsWithDigits:
                 cell["label"] = digitPredictor.predictDigit(cell["cell_image"])
