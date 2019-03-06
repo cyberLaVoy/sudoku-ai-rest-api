@@ -230,3 +230,14 @@ class PuzzleProcessor:
         for i in range(len(innerBoxes)):
             cells += self.extractCellsWithDigits(innerBoxes[i], i)
         return np.array(cells)
+    
+    def getPuzzleLayout(self, labeledCells):
+        layout = ['0']*81
+        for cell in labeledCells:
+            row = 3*(cell["box_index"]//3) + cell["cell_index"]//3
+            col = 3*(cell["box_index"]%3) + cell["cell_index"]%3
+            layout[9*row+col] = cell["label"]
+        layoutStr = ""
+        for l in layout:
+            layoutStr += l
+        return layoutStr
