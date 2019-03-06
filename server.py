@@ -34,15 +34,18 @@ class RequestHandler(BaseHTTPRequestHandler):
         try:
             puzzleProcessor = PuzzleProcessor(puzzleImage)
             cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
-        except:
+        except Exception as e:
+            print(e)
             self.handle422()
         print("Labeling cells with digits...")
         try:
             for cell in cellsWithDigits:
                 cell["label"] = digitPredictor.predictDigit(cell["cell_image"])
             layout = puzzleProcessor.getPuzzleLayout(cellsWithDigits)
-        except:
+        except Exception as e:
+            print(e)
             self.handle422()
+        print("Sending layout...")
         self.send_response(201)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
