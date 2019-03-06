@@ -31,12 +31,18 @@ class RequestHandler(BaseHTTPRequestHandler):
         length = int(self.headers["Content-length"])
         puzzleImage = self.rfile.read(length)
         print("Processing puzzle image...")
-        puzzleProcessor = PuzzleProcessor(puzzleImage)
-        cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
+        try:
+            puzzleProcessor = PuzzleProcessor(puzzleImage)
+            cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
+        except:
+            self.handle422()
         print("Labeling cells with digits...")
-        for cell in cellsWithDigits:
-            cell["label"] = digitPredictor.predictDigit(cell["cell_image"])
-        layout = puzzleProcessor.getPuzzleLayout(cellsWithDigits)
+        try:
+            for cell in cellsWithDigits:
+                cell["label"] = digitPredictor.predictDigit(cell["cell_image"])
+            layout = puzzleProcessor.getPuzzleLayout(cellsWithDigits)
+        except:
+            self.handle422()
         self.send_response(201)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
