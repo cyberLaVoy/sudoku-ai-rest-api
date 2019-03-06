@@ -46,6 +46,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         except Exception as e:
             print(e)
         print("Sending layout...")
+        print(layout)
         self.send_response(201)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
