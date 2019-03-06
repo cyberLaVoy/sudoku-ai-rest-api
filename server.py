@@ -32,7 +32,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         puzzleImage = self.rfile.read(length)
         print("Processing puzzle image...")
         try:
-            puzzleProcessor = PuzzleProcessor(str(puzzleImage))
+            puzzleProcessor = PuzzleProcessor(bytes(puzzleImage))
             cellsWithDigits = puzzleProcessor.extractDigitContainingCells()
         except Exception as e:
             print(e)
